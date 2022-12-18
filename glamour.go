@@ -25,7 +25,7 @@ type TermRendererOption func(*TermRenderer) error
 // customization and styles to fit your needs.
 type TermRenderer struct {
 	md          goldmark.Markdown
-	ansiOptions ansi.Options
+	AnsiOptions ansi.Options
 	buf         bytes.Buffer
 	renderBuf   bytes.Buffer
 }
@@ -68,7 +68,7 @@ func NewTermRenderer(options ...TermRendererOption) (*TermRenderer, error) {
 				parser.WithAutoHeadingID(),
 			),
 		),
-		ansiOptions: ansi.Options{
+		AnsiOptions: ansi.Options{
 			WordWrap:     80,
 			ColorProfile: termenv.TrueColor,
 		},
@@ -78,7 +78,7 @@ func NewTermRenderer(options ...TermRendererOption) (*TermRenderer, error) {
 			return nil, err
 		}
 	}
-	ar := ansi.NewRenderer(tr.ansiOptions)
+	ar := ansi.NewRenderer(tr.AnsiOptions)
 	tr.md.SetRenderer(
 		renderer.NewRenderer(
 			renderer.WithNodeRenderers(
@@ -92,7 +92,7 @@ func NewTermRenderer(options ...TermRendererOption) (*TermRenderer, error) {
 // WithBaseURL sets a TermRenderer's base URL.
 func WithBaseURL(baseURL string) TermRendererOption {
 	return func(tr *TermRenderer) error {
-		tr.ansiOptions.BaseURL = baseURL
+		tr.AnsiOptions.BaseURL = baseURL
 		return nil
 	}
 }
@@ -101,7 +101,7 @@ func WithBaseURL(baseURL string) TermRendererOption {
 // (TrueColor / ANSI256 / ANSI).
 func WithColorProfile(profile termenv.Profile) TermRendererOption {
 	return func(tr *TermRenderer) error {
-		tr.ansiOptions.ColorProfile = profile
+		tr.AnsiOptions.ColorProfile = profile
 		return nil
 	}
 }
@@ -114,7 +114,7 @@ func WithStandardStyle(style string) TermRendererOption {
 		if err != nil {
 			return err
 		}
-		tr.ansiOptions.Styles = *styles
+		tr.AnsiOptions.Styles = *styles
 		return nil
 	}
 }
@@ -143,9 +143,9 @@ func WithStylePath(stylePath string) TermRendererOption {
 				return err
 			}
 
-			return json.Unmarshal(jsonBytes, &tr.ansiOptions.Styles)
+			return json.Unmarshal(jsonBytes, &tr.AnsiOptions.Styles)
 		}
-		tr.ansiOptions.Styles = *styles
+		tr.AnsiOptions.Styles = *styles
 		return nil
 	}
 }
@@ -153,7 +153,7 @@ func WithStylePath(stylePath string) TermRendererOption {
 // WithStyles sets a TermRenderer's styles.
 func WithStyles(styles ansi.StyleConfig) TermRendererOption {
 	return func(tr *TermRenderer) error {
-		tr.ansiOptions.Styles = styles
+		tr.AnsiOptions.Styles = styles
 		return nil
 	}
 }
@@ -162,7 +162,7 @@ func WithStyles(styles ansi.StyleConfig) TermRendererOption {
 // jsonBytes.
 func WithStylesFromJSONBytes(jsonBytes []byte) TermRendererOption {
 	return func(tr *TermRenderer) error {
-		return json.Unmarshal(jsonBytes, &tr.ansiOptions.Styles)
+		return json.Unmarshal(jsonBytes, &tr.AnsiOptions.Styles)
 	}
 }
 
@@ -173,14 +173,14 @@ func WithStylesFromJSONFile(filename string) TermRendererOption {
 		if err != nil {
 			return err
 		}
-		return json.Unmarshal(jsonBytes, &tr.ansiOptions.Styles)
+		return json.Unmarshal(jsonBytes, &tr.AnsiOptions.Styles)
 	}
 }
 
 // WithWordWrap sets a TermRenderer's word wrap.
 func WithWordWrap(wordWrap int) TermRendererOption {
 	return func(tr *TermRenderer) error {
-		tr.ansiOptions.WordWrap = wordWrap
+		tr.AnsiOptions.WordWrap = wordWrap
 		return nil
 	}
 }
@@ -188,7 +188,7 @@ func WithWordWrap(wordWrap int) TermRendererOption {
 // WithPreservedNewlines preserves newlines from being replaced.
 func WithPreservedNewLines() TermRendererOption {
 	return func(tr *TermRenderer) error {
-		tr.ansiOptions.PreserveNewLines = true
+		tr.AnsiOptions.PreserveNewLines = true
 		return nil
 	}
 }
