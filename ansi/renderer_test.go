@@ -64,7 +64,7 @@ func TestRenderer(t *testing.T) {
 			),
 		)
 
-		ar := NewRenderer(options)
+		ar := NewRenderer(&options)
 		md.SetRenderer(
 			renderer.NewRenderer(
 				renderer.WithNodeRenderers(util.Prioritized(ar, 1000))))
@@ -137,7 +137,7 @@ func TestRendererIssues(t *testing.T) {
 				),
 			)
 
-			ar := NewRenderer(options)
+			ar := NewRenderer(&options)
 			md.SetRenderer(
 				renderer.NewRenderer(
 					renderer.WithNodeRenderers(util.Prioritized(ar, 1000))))

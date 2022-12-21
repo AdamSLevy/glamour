@@ -78,7 +78,7 @@ func NewTermRenderer(options ...TermRendererOption) (*TermRenderer, error) {
 			return nil, err
 		}
 	}
-	ar := ansi.NewRenderer(tr.AnsiOptions)
+	ar := ansi.NewRenderer(&tr.AnsiOptions)
 	tr.md.SetRenderer(
 		renderer.NewRenderer(
 			renderer.WithNodeRenderers(

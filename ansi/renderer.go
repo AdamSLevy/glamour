@@ -28,7 +28,7 @@ type ANSIRenderer struct {
 }
 
 // NewRenderer returns a new ANSIRenderer with style and options set.
-func NewRenderer(options Options) *ANSIRenderer {
+func NewRenderer(options *Options) *ANSIRenderer {
 	return &ANSIRenderer{
 		context: NewRenderContext(options),
 	}

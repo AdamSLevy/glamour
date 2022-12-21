@@ -9,7 +9,7 @@ import (
 
 // RenderContext holds the current rendering options and state.
 type RenderContext struct {
-	options Options
+	options *Options
 
 	blockStack *BlockStack
 	table      *TableElement
@@ -18,7 +18,7 @@ type RenderContext struct {
 }
 
 // NewRenderContext returns a new RenderContext.
-func NewRenderContext(options Options) RenderContext {
+func NewRenderContext(options *Options) RenderContext {
 	return RenderContext{
 		options:    options,
 		blockStack: &BlockStack{},
