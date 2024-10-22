@@ -11,3 +11,5 @@ require (
 	github.com/yuin/goldmark v1.5.3
 	github.com/yuin/goldmark-emoji v1.0.1
 )
+
+replace github.com/alecthomas/chroma/v2 => github.com/AdamSLevy/chroma/v2 v2.0.0-20221220144730-f8b3daf8e06b
